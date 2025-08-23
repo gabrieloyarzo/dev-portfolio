@@ -1,0 +1,92 @@
+---
+enum Role {
+  FRONTEND = 'Frontend',
+  BACKEND = 'Backend',
+  FULLSTACK = 'Fullstack',
+}
+
+enum Tag {
+  ANGULAR = 'Angular',
+  EXPRESS = 'Express.js',
+  NGRX = 'NgRx',
+  TAILWIND = 'Tailwind CSS',
+  SEQUELIZE = 'Sequelize',
+  REACT = 'React',
+  MATERIAL_UI = 'Material UI',
+  NEXT = 'Next.js',
+  VUE = 'Vue.js',
+  ASTRO = 'Astro',
+}
+
+interface Project {
+  imageUrl: string;
+  role: Role;
+  title: string;
+  description: string;
+  tags: Tag[];
+}
+
+const PROJECTS: Project[] = [
+  {
+    imageUrl: '/projects/santana.webp',
+    role: Role.FULLSTACK,
+    title: 'Automotriz Santana SpA',
+    description:
+      'Portafolio is a personal website built with Astro and Tailwind CSS. It is a showcase of my skills and experiences, and a way to express my creativity.',
+    tags: [Tag.ANGULAR, Tag.EXPRESS, Tag.TAILWIND, Tag.SEQUELIZE],
+  },
+  {
+    imageUrl: '/projects/pi-gourmet.webp',
+    role: Role.FRONTEND,
+    title: 'Pi Gourmet',
+    description:
+      'Portafolio is a personal website built with Astro and Tailwind CSS. It is a showcase of my skills and experiences, and a way to express my creativity.',
+    tags: [Tag.ANGULAR, Tag.NGRX, Tag.TAILWIND],
+  },
+  {
+    imageUrl: '/projects/riego-sur.webp',
+    role: Role.FRONTEND,
+    title: 'Entre Riegos del Sur SpA',
+    description:
+      'Portafolio is a personal website built with Astro and Tailwind CSS. It is a showcase of my skills and experiences, and a way to express my creativity.',
+    tags: [Tag.ANGULAR, Tag.TAILWIND],
+  },
+  {
+    imageUrl: '/projects/stock-box.webp',
+    role: Role.FRONTEND,
+    title: 'Stock Box',
+    description:
+      'Portafolio is a personal website built with Astro and Tailwind CSS. It is a showcase of my skills and experiences, and a way to express my creativity.',
+    tags: [Tag.REACT, Tag.MATERIAL_UI],
+  },
+];
+---
+
+<h1 class="text-3xl font-bold">Proyectos</h1>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+  {
+    PROJECTS.map((projects) => (
+      <article class="relative flex flex-col rounded-3xl shadow-sm">
+        <div class="absolute chip top-2 left-2 bg-gray-50/30 text-gray-800 backdrop-blur-sm text-sm font-medium border-gray-600">
+          {projects.role}
+        </div>
+
+        <div class="w-full aspect-[16/9] rounded-3xl overflow-clip">
+          <img src={projects.imageUrl} alt={projects.title} class="w-full object-cover" />
+        </div>
+
+        <div class="flex flex-col gap-4 p-4 justify-between h-full">
+          <div>
+            <h2 class="text-xl font-semibold">{projects.title}</h2>
+            <p class="text-gray-600">{projects.description}</p>
+          </div>
+          <div class="flex flex-wrap gap-2 text-sm">
+            {projects.tags.map((technology) => (
+              <div class="chip">{technology}</div>
+            ))}
+          </div>
+        </div>
+      </article>
+    ))
+  }
+</div>

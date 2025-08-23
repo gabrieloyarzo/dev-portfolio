@@ -1,0 +1,84 @@
+---
+import Experience from '../components/Experience.astro';
+import Projects from '../components/Projects.astro';
+import Layout from '../layouts/Layout.astro';
+import Contact from '../components/Contact.astro';
+import SectionContainer from '../components/SectionContainer.astro';
+import { SECTION } from '../components/Header.astro';
+---
+
+<Layout>
+  <main class="flex flex-col items-center w-full lg:w-3/7 mx-4 lg:mx-auto pb-44">
+    <SectionContainer>
+      <div class="flex gap-2">
+        <div class="flex flex-col gap-10">
+          <div>
+            <h3 class="text-xl"><span>Hola,</span><span class="text-primary-500"> Soy</span></h3>
+            <h1 class="text-5xl font-bold">Gabriel Oyarzo</h1>
+            <h2 class="text-2xl">Ingeniero Civil en Informática</h2>
+            <p class="text-gray-600 mt-10 text-wrap">
+              Soy Ingeniero Civil en Informática especializado en desarrollo web. Me apasiona crear
+              aplicaciones y sitios modernos, centrados en la eficiencia y una excelente experiencia
+              de usuario.
+            </p>
+          </div>
+
+          <a class="w-fit"   href="/Gabriel_Oyarzo_CV.pdf" download>
+            <button class="btn btn-primary text-sm" aria-label="Descargar Curriculum Vitae">
+              Descargar CV
+            </button>
+          </a>
+
+          <!-- <div class="flex flex-col gap-4">
+            <h3>Encuéntrame en</h3>
+            <nav class="flex gap-x-4">
+              <button class="btn btn-ghost w-8 h-8" aria-label="Linkedin">
+                <i class="fa-brands fa-linkedin-in"></i>
+              </button>
+              <button class="btn btn-ghost w-8 h-8" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+              </button>
+              <button class="btn btn-ghost w-8 h-8" aria-label="X">
+                <i class="fa-brands fa-x-twitter"></i>
+              </button>
+            </nav>
+          </div> -->
+        </div>
+        <div class="w-2/5 h-full">
+          <img
+            class="rounded-full"
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.vexels.com%2Fmedia%2Fusers%2F3%2F145908%2Fraw%2F52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg&f=1&nofb=1&ipt=36611c8ed0511e9c02e9dc3688b1c6604db520fe2097a346ecbaf20c506112e8"
+            alt="Gabriel Oyarzo"
+          />
+        </div>
+      </div>
+    </SectionContainer>
+
+    <SectionContainer id={SECTION.EXPERIENCE.id}>
+      <Experience />
+    </SectionContainer>
+
+    <SectionContainer id={SECTION.PROJECTS.id}>
+      <Projects />
+    </SectionContainer>
+
+    <SectionContainer id={SECTION.ABOUT.id}>
+      <h1 class="text-3xl font-bold">Sobre mí</h1>
+      <p class="text-gray-600 text-wrap">
+        Soy Gabriel Alexis Oyarzo Ramírez, Ingeniero Civil en Informática titulado de la Universidad
+        de Los Lagos, Chile. Durante mi formación y prácticas profesionales he trabajado en el
+        desarrollo de aplicaciones administrativas, gestión de inventarios y soluciones web
+        modernas, con experiencia en tecnologías como Angular, Express.js, Tailwind CSS, PHP,
+        PostgreSQL, MySQL entre las más destacadas. Me motiva crear software que aporte valor real a
+        las personas, optimizando procesos y facilitando la toma de decisiones. Me interesa seguir
+        creciendo en el área del desarrollo frontend y la arquitectura de aplicaciones, siempre
+        explorando nuevas herramientas y buenas prácticas. Fuera del código, disfruto de la música y
+        el aprendizaje autodidacta en distintas áreas.
+      </p>
+    </SectionContainer>
+
+    <SectionContainer id={SECTION.CONTACT.id}>
+      <Contact />
+    </SectionContainer>
+  </main>
+</Layout>

@@ -1,0 +1,63 @@
+---
+interface Experience {
+  date: string;
+  title: string;
+  company: string;
+  location: string;
+  description: string;
+  link?: string;
+}
+
+const EXPERIENCES: Experience[] = [
+  {
+    date: 'Febrero de 2025 a Mayo de 2025',
+    title: 'Desarrollador Fullstack',
+    company: 'Automotriz Santana SpA',
+    location: 'Chile',
+    description:
+      'Desarrollé el módulo de usuarios y visualización de vehículos para un sistema web de gestión de existencias en sucursales de Osorno, Puerto Montt y Santiago, usando Angular (frontend) y Express.js (backend), e implementé la base de datos en PostgreSQL con Sequelize.',
+  },
+  {
+    date: 'Febrero de 2023 a Marzo de 2023',
+    title: 'Desarrollador de Aplicaciones Internas',
+    company: 'Juzgado de Familia de Osorno',
+    location: 'Chile',
+    description:
+      'Desarrollé aplicaciones administrativas para inventarios y suplencias en Visual Basic (MS Excel) y migré un sistema generador de números de oficios a un nuevo equipo usando HTML, PHP, CSS y MySQL.',
+  },
+];
+---
+
+<h1 class="text-3xl font-bold">Experiencia</h1>
+<ol class="relative border-s border-gray-200 ml-2">
+  {
+    EXPERIENCES.map((experience) => (
+      <li class="mb-10 ms-6">
+        <span class="absolute flex items-center justify-center w-6 h-6 bg-primary-100 rounded-full -start-3 ring-8 ring-gray-50">
+          <svg
+            class="w-2.5 h-2.5 text-primary-800"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+          </svg>
+        </span>
+        <div class="flex items-end gap-2">
+          <h3 class="text-lg font-semibold text-gray-900">{experience.title}</h3>
+          <span class="text-md text-gray-600">-</span>
+          <span class="text-md text-gray-600">
+            {experience.company}, {experience.location}
+          </span>
+        </div>
+        <time class="block font-normal leading-none mb-2 text-sm text-gray-500">
+          {experience.date}
+        </time>
+        <p class="mb-4 text-base font-normal text-gray-600 text-justify">
+          {experience.description}
+        </p>
+      </li>
+    ))
+  }
+</ol>
