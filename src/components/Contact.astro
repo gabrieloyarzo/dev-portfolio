@@ -1,23 +1,23 @@
+---
+import { SOCIALS_URL } from '../assets/socials';
+---
+
 <h1 class="text-3xl font-bold">Contacto</h1>
 <p class="text-gray-600 text-wrap">
   Estoy abierto a nuevas oportunidades y colaboraciones. Si quieres ponerte en contacto conmigo,
   puedes escribirme directamente o utilizar alguno de mis enlaces de redes sociales.
 </p>
-<nav class="flex gap-x-4">
-  <a href="mailto:gabrieloyarzoramirez@gmail.com" target="_blank" rel="noopener noreferrer">
+<nav class="flex gap-4 flex-wrap">
+  <a href={SOCIALS_URL.mail} target="_blank" rel="noopener noreferrer">
     <button class="btn btn-ghost" aria-label="Email">
       <i class="fa-solid fa-envelope"></i>
       <div>gabrieloyarzoramirez@gmail.com</div>
     </button>
   </a>
-  <a
-    href="https://www.linkedin.com/in/gabriel-oyarzo-463298274/"
-    target="_blank"
-    rel="noopener noreferrer"
-  >
+  <a href={SOCIALS_URL.linkedIn} target="_blank" rel="noopener noreferrer">
     <button class="btn btn-ghost" aria-label="Linkedin">
       <i class="fa-brands fa-linkedin-in"></i>
-      <div>Linkedin</div>
+      <div>LinkedIn</div>
     </button>
   </a>
 </nav>

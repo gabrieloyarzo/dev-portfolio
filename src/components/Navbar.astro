@@ -1,0 +1,63 @@
+---
+interface Section {
+  label: string;
+  id: string;
+  icon: string;
+}
+
+type Sections = 'HOME' | 'EXPERIENCE' | 'PROJECTS' | 'ABOUT' | 'CONTACT';
+
+export const SECTION: Record<Sections, Section> = {
+  HOME: {
+    label: 'Inicio',
+    id: 'inicio',
+    icon: 'fa-solid fa-house',
+  },
+  EXPERIENCE: {
+    label: 'Experiencia',
+    id: 'experiencia',
+    icon: 'fa-solid fa-briefcase',
+  },
+  PROJECTS: {
+    label: 'Proyectos',
+    id: 'proyectos',
+    icon: 'fa-solid fa-code-branch',
+  },
+  ABOUT: {
+    label: 'Sobre mí',
+    id: 'sobre-mi',
+    icon: 'fa-solid fa-user',
+  },
+  CONTACT: {
+    label: 'Contacto',
+    id: 'contacto',
+    icon: 'fa-solid fa-envelope',
+  },
+};
+
+const SECTIONS = Object.values(SECTION);
+---
+
+<nav
+  class="fixed bottom-0 sm:top-3 left-1/2 -translate-x-1/2 z-50 w-full sm:w-fit border border-gray-200 sm:border-0"
+>
+  <div
+    class="flex justify-between sm:justify-baseline items-center font-semibold text-sm sm:text-base
+           sm:rounded-full sm:shadow-sm sm:backdrop-blur-sm bg-gray-50"
+  >
+    {
+      SECTIONS.map((section) => (
+        <a
+          href={`#${section.id}`}
+          class="inline-block p-3 rounded-full
+                 font-medium duration-200 hover:text-gray-600"
+        >
+          <div class="hidden sm:block whitespace-nowrap">{section.label}</div>
+          <div class="block sm:hidden text-xl">
+            <i class={`${section.icon} text-2xl px-8`} />
+          </div>
+        </a>
+      ))
+    }
+  </div>
+</nav>

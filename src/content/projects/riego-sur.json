@@ -1,0 +1,8 @@
+{
+  "order": 2,
+  "imageUrl": "/projects/riego-sur.webp",
+  "role": "Frontend",
+  "title": "Entre Riegos del Sur SpA",
+  "description": "Sistema de gestión de inventario de una empresa agrícola. El sistema permite la gestión de los productos como abrazaderas, acoples, motores, entre otros.",
+  "technologies": ["Angular", "Tailwind"]
+}

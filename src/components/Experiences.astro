@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+
+const experiences = (await getCollection('experiences')).sort(
+  (a, b) => b.data.order - a.data.order,
+);
+---
+
+<h1 class="text-3xl font-bold">Experiencia</h1>
+<ol class="relative border-s border-gray-200 ml-2">
+  {
+    experiences.map((experience) => (
+      <li class="mb-10 ms-6">
+        <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-950 rounded-full -start-3 ring-8 ring-gray-50 mt-0.5">
+          <svg
+            class="w-2.5 h-2.5 text-gray-200"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+          >
+            <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+          </svg>
+        </span>
+        <div class="flex items-end gap-2">
+          <h3 class="text-lg font-semibold text-gray-900">{experience.data.title}</h3>
+          <span class="text-md text-gray-600">-</span>
+          <span class="text-md text-gray-600">
+            {experience.data.company}, {experience.data.location}
+          </span>
+        </div>
+        <time class="block font-normal leading-none mb-2 text-sm text-gray-500">
+          {experience.data.date}
+        </time>
+        <p class="mb-4 text-base font-normal text-gray-600 text-justify">
+          {experience.data.description}
+        </p>
+      </li>
+    ))
+  }
+</ol>

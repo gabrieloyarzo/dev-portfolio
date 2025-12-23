@@ -1,33 +1,38 @@
 ---
-import Experience from '../components/Experience.astro';
+import Experiences from '../components/Experiences.astro';
 import Projects from '../components/Projects.astro';
 import Layout from '../layouts/Layout.astro';
 import Contact from '../components/Contact.astro';
 import SectionContainer from '../components/SectionContainer.astro';
-import { SECTION } from '../components/Header.astro';
+import { SECTION } from '../components/Navbar.astro';
 ---
 
 <Layout>
-  <main class="flex flex-col items-center w-full lg:w-3/7 mx-4 lg:mx-auto pb-44">
-    <SectionContainer>
-      <div class="flex gap-2">
-        <div class="flex flex-col gap-10">
-          <div>
-            <h3 class="text-xl"><span>Hola,</span><span class="text-primary-500"> Soy</span></h3>
-            <h1 class="text-5xl font-bold">Gabriel Oyarzo</h1>
-            <h2 class="text-2xl">Ingeniero Civil en Informática</h2>
+  <main class="flex flex-col w-full p-4 lg:w-3/7 lg:mx-auto pb-44">
+    <section id={SECTION.HOME.id} class="mt-20 sm:mt-44 scroll-mt-24 flex flex-col gap-4 w-full">
+      <div class="flex flex-col md:flex-row gap-2">
+        <div class="flex gap-10">
+          <div class="flex flex-col gap-4">
+            <div>
+              <h3 class="text-xl">Hola, Soy</h3>
+              <h1 class="text-5xl font-bold">Gabriel Oyarzo</h1>
+              <h2 class="text-2xl">Ingeniero Civil en Informática</h2>
+            </div>
             <p class="text-gray-600 mt-10 text-wrap">
-              Soy Ingeniero Civil en Informática especializado en desarrollo web. Me apasiona crear
-              aplicaciones y sitios modernos, centrados en la eficiencia y una excelente experiencia
-              de usuario.
+              Soy Ingeniero Civil en Informática, titulado con distinción máxima por la Universidad
+              de Los Lagos, Chile. Desarrollo aplicaciones web end-to-end, APIs REST y bases de
+              datos optimizadas, trabajando con servicios en la nube para desplegar y operar
+              sistemas de forma eficiente. Me motiva la automatización de procesos, el diseño de
+              arquitecturas sólidas y la creación de soluciones tecnológicas que generen impacto
+              real.
             </p>
-          </div>
 
-          <a class="w-fit"   href="/Gabriel_Oyarzo_CV.pdf" download>
-            <button class="btn btn-primary text-sm" aria-label="Descargar Curriculum Vitae">
-              Descargar CV
-            </button>
-          </a>
+            <a class="w-fit" href="/Gabriel_Oyarzo_CV.pdf" download>
+              <button class="btn btn-primary text-sm" aria-label="Descargar Curriculum Vitae">
+                Descargar CV
+              </button>
+            </a>
+          </div>
 
           <!-- <div class="flex flex-col gap-4">
             <h3>Encuéntrame en</h3>
@@ -44,18 +49,18 @@ import { SECTION } from '../components/Header.astro';
             </nav>
           </div> -->
         </div>
-        <div class="w-2/5 h-full">
+        <!-- <div class="w-2/5">
           <img
             class="rounded-full"
             src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.vexels.com%2Fmedia%2Fusers%2F3%2F145908%2Fraw%2F52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg&f=1&nofb=1&ipt=36611c8ed0511e9c02e9dc3688b1c6604db520fe2097a346ecbaf20c506112e8"
             alt="Gabriel Oyarzo"
           />
-        </div>
+        </div> -->
       </div>
-    </SectionContainer>
+    </section>
 
     <SectionContainer id={SECTION.EXPERIENCE.id}>
-      <Experience />
+      <Experiences />
     </SectionContainer>
 
     <SectionContainer id={SECTION.PROJECTS.id}>

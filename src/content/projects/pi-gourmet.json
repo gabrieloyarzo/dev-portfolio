@@ -1,0 +1,8 @@
+{
+  "order": 3,
+  "imageUrl": "/projects/pi-gourmet.webp",
+  "role": "Frontend",
+  "title": "Pi Gourmet",
+  "description": "Sistema de gestión de restaurantes de Pi Gourmet. El sistema permite la gestión de los pedidos, lotes, insumos, venta y usuarios de la aplicación.",
+  "technologies": ["Angular", "NgRx", "Tailwind"]
+}

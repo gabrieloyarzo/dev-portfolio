@@ -1,27 +1,29 @@
 ---
 import '../styles/global.css';
-import Header from '../components/Header.astro';
+import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="overflow-hidden">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Gabriel Oyarzo | Portafolio</title>
+    <title>Gabriel Oyarzo | Portfolio</title>
   </head>
+  <Navbar />
   <body>
     <div
-      class="absolute top-0 z-[-2] h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,var(--color-primary-100),var(--color-gray-50))]"
+      class="fixed inset-0 -z-10 w-full bg-gray-50
+         bg-[radial-gradient(var(--color-gray-200)_1px,transparent_1px)]
+         [background-size:16px_16px] sm:visible invisible"
     >
     </div>
-    <Header />
     <slot />
-    <Footer />
   </body>
+  <Footer />
 </html>
 
 <style>

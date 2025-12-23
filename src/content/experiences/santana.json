@@ -1,0 +1,8 @@
+{
+  "order": 3,
+  "date": "Febrero de 2025 a Mayo de 2025",
+  "title": "Desarrollador Fullstack",
+  "company": "Automotriz Santana SpA",
+  "location": "Chile",
+  "description": "Desarrollé el módulo de usuarios y visualización de vehículos para un sistema web de gestión de existencias en sucursales de Osorno, Puerto Montt y Santiago, usando Angular (frontend) y Express.js (backend), e implementé la base de datos en PostgreSQL con Sequelize."
+}

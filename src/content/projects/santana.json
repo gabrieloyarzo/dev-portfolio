@@ -1,0 +1,8 @@
+{
+  "order": 4,
+  "imageUrl": "/projects/santana.webp",
+  "role": "Fullstack",
+  "title": "Automotriz Santana SpA",
+  "description": "Sistema web de gestión de vehículos para las diferentes sucursales de Automotriz Santana SpA. El sistema permite la gestión de los vehículos, la venta y la gestión de usuarios de la aplicación.",
+  "technologies": ["Angular", "NgRx", "Express.js", "Tailwind", "Sequelize"]
+}
