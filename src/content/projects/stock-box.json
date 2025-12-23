@@ -3,6 +3,6 @@
   "imageUrl": "/projects/stock-box.webp",
   "role": "Fullstack",
   "title": "Stock Box",
-  "description": "Sistema de gestión de inventario de productos genérico, como productos de alimentación, bebidas, etc. El sistema permite la gestión de los productos, la venta y la gestión de usuarios de la aplicación.",
-  "technologies": ["React", "Material UI"]
+  "description": "Sistema para escritorio de gestión de inventario de productos genérico, como productos de alimentación, bebidas, etc. El sistema permite la gestión de los productos, la venta y la gestión de usuarios de la aplicación.",
+  "technologies": ["React", "Material UI", "Express.js", "Prisma", "Tauri"]
 }

@@ -4,5 +4,5 @@
   "title": "Desarrollador",
   "company": "Entre Riegos del Sur SpA",
   "location": "Chile",
-  "description": "Desarrollé aplicaciones administrativas para inventarios y suplencias en Visual Basic (MS Excel) y migré un sistema generador de números de oficios a un nuevo equipo usando HTML, PHP, CSS y MySQL."
+  "description": "Desarrollé un sistema de gestión de inventario agrícola para la empresa de la zona urbana. El sistema fue diseñado para gestionar la información de productos, precios y cantidades en stock."
 }

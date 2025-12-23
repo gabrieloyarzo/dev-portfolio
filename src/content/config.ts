@@ -22,6 +22,8 @@ export const projects = defineCollection({
         'Next.js',
         'Vue.js',
         'Astro',
+        'Prisma',
+        'Tauri',
       ]),
     ),
   }),
