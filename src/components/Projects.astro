@@ -8,7 +8,7 @@ const projects = (await getCollection('projects')).sort((a, b) => b.data.order -
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
   {
     projects.map((project) => (
-      <article class="flex flex-col rounded-3xl shadow-sm">
+      <article class="flex flex-col rounded-3xl shadow-sm bg-gray-50">
         <div class="w-full aspect-[16/9] rounded-t-3xl overflow-clip">
           <img src={project.data.imageUrl} alt={project.data.title} class="w-full object-cover" />
         </div>
