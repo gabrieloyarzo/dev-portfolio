@@ -19,7 +19,7 @@ const projects = (await getCollection('projects')).sort((a, b) => b.data.order -
               <p class="font-mono uppercase text-sm">{project.data.role}</p>
               <h2 class="text-xl font-semibold">{project.data.title}</h2>
             </div>
-            <p class="text-gray-600">{project.data.description}</p>
+            <p class="text-gray-600 text-pretty sm:text-left">{project.data.description}</p>
           </div>
           <div class="flex flex-wrap gap-2 text-sm">
             {project.data.technologies.map((tech) => (

@@ -32,7 +32,7 @@ const experiences = (await getCollection('experiences')).sort(
         <time class="block font-normal leading-none mb-2 text-sm text-gray-500">
           {experience.data.date}
         </time>
-        <p class="mb-4 text-base font-normal text-gray-600 text-justify">
+        <p class="mb-4 font-normal text-gray-600 text-pretty sm:text-left">
           {experience.data.description}
         </p>
       </li>
