@@ -39,7 +39,7 @@ const SECTIONS = Object.values(SECTION);
 ---
 
 <nav
-  class="fixed bottom-0 sm:top-3 left-1/2 -translate-x-1/2 z-50 w-full sm:w-fit border-t border-gray-200 sm:border-0"
+  class="fixed bottom-0 sm:top-3 left-1/2 -translate-x-1/2 z-50 h-fit w-full sm:w-fit border-t border-gray-200 sm:border-0"
 >
   <div
     class="flex justify-between sm:justify-baseline items-center font-semibold text-sm px-2 sm:px-0 sm:text-base
@@ -49,7 +49,7 @@ const SECTIONS = Object.values(SECTION);
       SECTIONS.map((section) => (
         <a
           href={`#${section.id}`}
-          class="flex justify-center sm:inline-block p-2 sm:p-3 rounded-full
+          class="flex justify-center sm:inline-block p-3 rounded-full
                  font-medium duration-200 hover:text-gray-600"
         >
           <div class="hidden sm:block whitespace-nowrap">{section.label}</div>
