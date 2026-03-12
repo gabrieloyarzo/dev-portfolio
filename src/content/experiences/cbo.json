@@ -1,0 +1,8 @@
+{
+  "order": 4,
+  "date": "Enero de 2026 a la fecha",
+  "title": "Analista de Inteligencia y Negocios",
+  "company": "Clínica Alemana Osorno",
+  "location": "Chile",
+  "description": "Trabajo en la integración de sistemas con SAP ECC mediante ABAP y transferencia de archivos vía SFTP para automatizar la extracción de datos operacionales, financieros y clínicos desde los módulos ISH, SD y FI. Diseño pipelines ETL para transformar y estructurar datos orientados a indicadores de gestión institucional y desarrollo dashboards e informes en R y Python para el seguimiento de KPIs y apoyo a la toma de decisiones. Además, desarrollé un sistema web de cobranza utilizando Next.js y Spring Boot para el monitoreo y gestión de deudores."
+}
