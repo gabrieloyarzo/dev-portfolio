@@ -1,0 +1,5 @@
+{
+  "order": 1,
+  "category": "Lenguajes de Programación",
+  "items": ["Python", "JavaScript", "TypeScript", "R", "SQL", "Java", "C", "PHP", "Visual Basic"]
+}

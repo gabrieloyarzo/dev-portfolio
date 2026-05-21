@@ -1,0 +1,435 @@
+---
+import { getCollection } from 'astro:content';
+
+const [profileEntries, experienceEntries, educationEntries, skillEntries, languageEntries] =
+  await Promise.all([
+    getCollection('profile'),
+    getCollection('experiences'),
+    getCollection('education'),
+    getCollection('skills'),
+    getCollection('languages'),
+  ]);
+
+const profile = profileEntries[0].data;
+const experiences = experienceEntries.sort((a, b) => b.data.order - a.data.order);
+const education = educationEntries.sort((a, b) => b.data.order - a.data.order);
+const skillGroups = skillEntries.sort((a, b) => a.data.order - b.data.order);
+const langs = languageEntries.sort((a, b) => a.data.order - b.data.order);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{profile.name} — Curriculum Vitae</title>
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="screen-bar" aria-hidden="true">
+      <button onclick="window.print()">Imprimir / Guardar PDF</button>
+      <a href="/">← Volver al portfolio</a>
+    </div>
+
+    <main class="cv">
+      <header>
+        <h1>{profile.name}</h1>
+        <p class="cv-subtitle">{profile.title}</p>
+        <ul class="cv-contact">
+          <li>{profile.location}</li>
+          <li>
+            <a href={`mailto:${profile.email}`}>{profile.email}</a>
+          </li>
+          <li>
+            <a href={`https://${profile.website}`}>{profile.website}</a>
+          </li>
+          <li>{profile.phone}</li>
+        </ul>
+      </header>
+
+      <section>
+        <h2>Presentación</h2>
+        <p>{profile.summary}</p>
+      </section>
+
+      <section>
+        <h2>Experiencia Laboral</h2>
+        {
+          experiences.map((exp) => (
+            <article class="entry">
+              <div class="entry-header">
+                <div class="entry-left">
+                  <strong>{exp.data.title}</strong>
+                  {exp.data.subtitle && <span class="entry-tag">{exp.data.subtitle}</span>}
+                  <span class="entry-company">
+                    {exp.data.company}, {exp.data.location}
+                  </span>
+                </div>
+                <time>{exp.data.date}</time>
+              </div>
+              <p>{exp.data.description}</p>
+              {exp.data.technologies && exp.data.technologies.length > 0 && (
+                <p class="entry-tech">
+                  <strong>Tecnologías:</strong> {exp.data.technologies.join(', ')}.
+                </p>
+              )}
+            </article>
+          ))
+        }
+      </section>
+
+      <section>
+        <h2>Educación</h2>
+        {
+          education.map((edu) => (
+            <article class="entry">
+              <div class="entry-header">
+                <strong>{edu.data.institution}</strong>
+                <span>{edu.data.location}</span>
+              </div>
+              {edu.data.degrees.map((deg) => (
+                <div class="degree-row">
+                  <em>{deg.title}</em>
+                  <span>{deg.period}</span>
+                </div>
+              ))}
+            </article>
+          ))
+        }
+      </section>
+
+      <section>
+        <h2>Conocimientos</h2>
+        <dl>
+          {
+            skillGroups.map((skill) => (
+              <div class="skill-row">
+                <dt>{skill.data.category}:</dt>
+                <dd>{skill.data.items.join(', ')}.</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </section>
+
+      <section>
+        <h2>Idiomas</h2>
+        <ul class="lang-list">
+          {
+            langs.map((lang) => (
+              <li>
+                <strong>{lang.data.name}:</strong> {lang.data.level}.
+                {lang.data.certifications && lang.data.certifications.length > 0 && (
+                  <ul class="cert-list">
+                    {lang.data.certifications.map((cert) => (
+                      <li>
+                        {cert.label}
+                        {cert.credential && ` — N° ${cert.credential}`}.
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+    </main>
+  </body>
+</html>
+
+<style>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.5;
+    color: #1a1a1a;
+    background: #fff;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  /* ─── Screen-only action bar ─────────────────────────── */
+  .screen-bar {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: #f3f4f6;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .screen-bar button {
+    padding: 0.4rem 1rem;
+    background: #111827;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .screen-bar button:hover {
+    background: #374151;
+  }
+
+  .screen-bar a {
+    font-size: 0.875rem;
+    color: #6b7280;
+    text-decoration: none;
+  }
+
+  .screen-bar a:hover {
+    color: #111827;
+  }
+
+  /* ─── CV layout ───────────────────────────────────────── */
+  .cv {
+    max-width: 740px;
+    margin: 2rem auto;
+    padding: 0 1.5rem 3rem;
+  }
+
+  /* ─── Header ─────────────────────────────────────────── */
+  header {
+    text-align: center;
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1.5px solid #1a1a1a;
+  }
+
+  header h1 {
+    font-size: 22pt;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.2rem;
+  }
+
+  .cv-subtitle {
+    font-size: 12pt;
+    font-weight: 400;
+    color: #374151;
+    margin-bottom: 0.6rem;
+  }
+
+  .cv-contact {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.25rem 1rem;
+    font-size: 9pt;
+    color: #4b5563;
+  }
+
+  .cv-contact li::before {
+    content: '·';
+    margin-right: 1rem;
+  }
+
+  .cv-contact li:first-child::before {
+    content: '';
+    margin-right: 0;
+  }
+
+  /* ─── Sections ────────────────────────────────────────── */
+  section {
+    margin-top: 1.1rem;
+  }
+
+  section h2 {
+    font-size: 10pt;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 0.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  section > p {
+    font-size: 10pt;
+    color: #374151;
+    line-height: 1.55;
+  }
+
+  /* ─── Experience / Education entries ─────────────────── */
+  .entry {
+    margin-bottom: 0.85rem;
+  }
+
+  .entry:last-child {
+    margin-bottom: 0;
+  }
+
+  .entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .entry-left {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem;
+  }
+
+  .entry-left strong {
+    font-size: 10pt;
+    font-weight: 600;
+  }
+
+  .entry-tag {
+    font-size: 8.5pt;
+    color: #6b7280;
+    font-style: italic;
+  }
+
+  .entry-company {
+    font-size: 9.5pt;
+    color: #374151;
+  }
+
+  .entry-header > time {
+    font-size: 9pt;
+    color: #6b7280;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .entry p {
+    font-size: 9.5pt;
+    color: #374151;
+    line-height: 1.5;
+    margin-top: 0.25rem;
+  }
+
+  .entry-tech {
+    font-size: 9pt;
+    color: #4b5563;
+    margin-top: 0.15rem !important;
+  }
+
+  .degree-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+    font-size: 9.5pt;
+    color: #374151;
+    padding-top: 0.15rem;
+    flex-wrap: wrap;
+  }
+
+  .degree-row em {
+    font-style: italic;
+  }
+
+  .degree-row span {
+    color: #6b7280;
+    white-space: nowrap;
+    font-size: 9pt;
+  }
+
+  /* ─── Skills ─────────────────────────────────────────── */
+  dl {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .skill-row {
+    display: flex;
+    gap: 0.4rem;
+    font-size: 9.5pt;
+    line-height: 1.45;
+  }
+
+  .skill-row dt {
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+    color: #1a1a1a;
+  }
+
+  .skill-row dd {
+    color: #374151;
+  }
+
+  /* ─── Languages ──────────────────────────────────────── */
+  .lang-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    font-size: 9.5pt;
+  }
+
+  .cert-list {
+    list-style: disc;
+    margin-left: 1.5rem;
+    margin-top: 0.1rem;
+    font-size: 9pt;
+    color: #4b5563;
+  }
+
+  /* ─── Print ───────────────────────────────────────────── */
+  @media print {
+    @page {
+      size: A4;
+      margin: 1.4cm 1.5cm;
+    }
+
+    body {
+      font-size: 9.5pt;
+      background: #fff;
+      color: #000;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .screen-bar {
+      display: none;
+    }
+
+    .cv {
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    section {
+      page-break-inside: avoid;
+    }
+
+    .entry {
+      page-break-inside: avoid;
+    }
+  }
+</style>

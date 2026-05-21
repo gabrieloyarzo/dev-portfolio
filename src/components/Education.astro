@@ -1,0 +1,32 @@
+---
+import { getCollection } from 'astro:content';
+
+const education = (await getCollection('education')).sort((a, b) => b.data.order - a.data.order);
+---
+
+<h1 class="text-3xl font-bold">Educación</h1>
+<ol class="relative border-s border-gray-200 ml-2">
+  {
+    education.map((edu) => (
+      <li class="mb-10 ms-6">
+        <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-950 rounded-full -start-3 ring-8 ring-gray-50 mt-0.5">
+          <i class="fa-solid fa-graduation-cap text-gray-200 text-xs" />
+        </span>
+        <div class="flex flex-col gap-1">
+          <div>
+            <h3 class="text-lg font-semibold text-gray-900">{edu.data.institution}</h3>
+            <p class="text-sm text-gray-500">{edu.data.location}</p>
+          </div>
+          <ul class="flex flex-col gap-0.5 mt-1">
+            {edu.data.degrees.map((deg) => (
+              <li class="flex flex-col sm:flex-row sm:items-baseline gap-0 sm:gap-2">
+                <em class="text-gray-800 not-italic">{deg.title}</em>
+                <span class="text-sm text-gray-500">{deg.period}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </li>
+    ))
+  }
+</ol>

@@ -1,0 +1,9 @@
+{
+  "order": 2,
+  "institution": "Universidad de Los Lagos",
+  "location": "Osorno, Chile",
+  "degrees": [
+    { "title": "Ingeniería Civil en Informática — Distinción Máxima", "period": "2020 – 2025 (11 semestres)" },
+    { "title": "Licenciatura en Ciencias de la Ingeniería", "period": "2020 – 2023 (8 semestres)" }
+  ]
+}

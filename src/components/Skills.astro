@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+
+const skillGroups = (await getCollection('skills')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<h1 class="text-3xl font-bold">Conocimientos</h1>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+  {
+    skillGroups.map((group) => (
+      <div class="flex flex-col gap-3 p-4 rounded-2xl bg-gray-50 shadow-2xs border border-gray-100">
+        <h3 class="font-mono text-xs font-semibold uppercase tracking-wide text-gray-500">
+          {group.data.category}
+        </h3>
+        <div class="flex flex-wrap gap-2">
+          {group.data.items.map((item) => (
+            <span class="chip">{item}</span>
+          ))}
+        </div>
+      </div>
+    ))
+  }
+</div>

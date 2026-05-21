@@ -1,0 +1,9 @@
+{
+  "order": 2,
+  "name": "Inglés",
+  "level": "Avanzado",
+  "certifications": [
+    { "label": "CEFR C1+", "credential": "PF4RA-CZ8ZJ" },
+    { "label": "EFSET C2", "credential": "MXGoyM" }
+  ]
+}

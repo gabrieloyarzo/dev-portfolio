@@ -1,0 +1,5 @@
+{
+  "order": 2,
+  "category": "Frameworks y Librerías",
+  "items": ["Angular", "React", "Next.js", "Spring Boot", "Express.js", "Tailwind CSS", "Sequelize", "Prisma"]
+}

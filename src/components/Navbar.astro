@@ -5,7 +5,7 @@ interface Section {
   icon: string;
 }
 
-type Sections = 'HOME' | 'EXPERIENCE' | 'PROJECTS' | 'ABOUT' | 'CONTACT';
+type Sections = 'HOME' | 'EXPERIENCE' | 'EDUCATION' | 'PROJECTS' | 'SKILLS' | 'ABOUT' | 'CONTACT';
 
 export const SECTION: Record<Sections, Section> = {
   HOME: {
@@ -18,10 +18,20 @@ export const SECTION: Record<Sections, Section> = {
     id: 'experiencia',
     icon: 'fa-solid fa-briefcase',
   },
+  EDUCATION: {
+    label: 'Educación',
+    id: 'educacion',
+    icon: 'fa-solid fa-graduation-cap',
+  },
   PROJECTS: {
     label: 'Proyectos',
     id: 'proyectos',
     icon: 'fa-solid fa-code-branch',
+  },
+  SKILLS: {
+    label: 'Conocimientos',
+    id: 'conocimientos',
+    icon: 'fa-solid fa-layer-group',
   },
   ABOUT: {
     label: 'Sobre mí',

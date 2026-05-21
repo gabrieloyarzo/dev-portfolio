@@ -1,6 +1,8 @@
 ---
 import Experiences from '../components/Experiences.astro';
+import Education from '../components/Education.astro';
 import Projects from '../components/Projects.astro';
+import Skills from '../components/Skills.astro';
 import Layout from '../layouts/Layout.astro';
 import Contact from '../components/Contact.astro';
 import SectionContainer from '../components/SectionContainer.astro';
@@ -34,29 +36,7 @@ import { SECTION } from '../components/Navbar.astro';
               </button>
             </a>
           </div>
-
-          <!-- <div class="flex flex-col gap-4">
-            <h3>Encuéntrame en</h3>
-            <nav class="flex gap-x-4">
-              <button class="btn btn-ghost w-8 h-8" aria-label="Linkedin">
-                <i class="fa-brands fa-linkedin-in"></i>
-              </button>
-              <button class="btn btn-ghost w-8 h-8" aria-label="Instagram">
-                <i class="fa-brands fa-instagram"></i>
-              </button>
-              <button class="btn btn-ghost w-8 h-8" aria-label="X">
-                <i class="fa-brands fa-x-twitter"></i>
-              </button>
-            </nav>
-          </div> -->
         </div>
-        <!-- <div class="w-2/5">
-          <img
-            class="rounded-full"
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fimages.vexels.com%2Fmedia%2Fusers%2F3%2F145908%2Fraw%2F52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg&f=1&nofb=1&ipt=36611c8ed0511e9c02e9dc3688b1c6604db520fe2097a346ecbaf20c506112e8"
-            alt="Gabriel Oyarzo"
-          />
-        </div> -->
       </div>
     </section>
 
@@ -64,8 +44,16 @@ import { SECTION } from '../components/Navbar.astro';
       <Experiences />
     </SectionContainer>
 
+    <SectionContainer id={SECTION.EDUCATION.id}>
+      <Education />
+    </SectionContainer>
+
     <SectionContainer id={SECTION.PROJECTS.id}>
       <Projects />
+    </SectionContainer>
+
+    <SectionContainer id={SECTION.SKILLS.id}>
+      <Skills />
     </SectionContainer>
 
     <SectionContainer id={SECTION.ABOUT.id}>
