@@ -1,7 +1,7 @@
 {
   "order": 5,
   "date": "Julio de 2026 a la fecha",
-  "title": "Ingeniero de Datos y Automatización",
+  "title": "Ingeniero de Datos",
   "company": "Clínica Alemana Osorno",
   "location": "Chile",
   "description": "Diseñé desde cero y opero el data warehouse institucional en PostgreSQL. Integra 20 sistemas fuente (SAP ECC, sistemas clínicos y de agenda, portales de isapres y Fonasa, APIs de terceros) en unas 1.200 tablas con más de 250 millones de filas. La ingesta es un registry declarativo en Python: agregar una tabla es un YAML y un DDL, sin código nuevo, con estrategias de carga (replace, merge, upsert, snapshot), deduplicación por llave, protección contra cargas vacías y watermarks para deltas de webhook; los portales de prestadores se extraen con Playwright. El modelado sigue Kimball en dbt: más de 460 modelos (staging, 97 dimensiones, 91 hechos) con tests de datos, monitoreo con Elementary y una capa semántica en MetricFlow. Sobre ella construí un servidor MCP que entrega métricas gobernadas a asistentes de IA (solo lectura, visibilidad por usuario, supresión de celdas pequeñas) y Atlas, un asistente con RAG (pgvector + Claude); un reverse ETL a SharePoint vía Microsoft Graph; modelos e informes de Power BI versionados como código, y 15 reportes recurrentes por correo definidos en YAML. Todo corre con launchd en un servidor propio y se despliega con GitHub Actions. Reemplazó consolidaciones manuales en Excel que tomaban días.",

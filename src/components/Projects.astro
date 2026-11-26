@@ -4,30 +4,25 @@ import { getCollection } from 'astro:content';
 const projects = (await getCollection('projects')).sort((a, b) => b.data.order - a.data.order);
 ---
 
-<h1 class="text-3xl font-bold">Proyectos</h1>
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<p class="mb-8 max-w-[60ch] text-muted">
+  Sistemas de gestión que desarrollé antes de dedicarme a los datos.
+</p>
+<ul class="grid gap-x-10 gap-y-12 md:grid-cols-3">
   {
-    projects.map((project) => (
-      <article class="flex flex-col rounded-3xl shadow-sm bg-gray-50">
-        <div class="w-full aspect-[16/9] rounded-t-3xl overflow-clip">
-          <img src={project.data.imageUrl} alt={project.data.title} class="w-full object-cover" />
-        </div>
-
-        <div class="flex flex-col gap-4 p-4 justify-between h-full">
-          <div>
-            <div>
-              <p class="font-mono uppercase text-sm">{project.data.role}</p>
-              <h2 class="text-xl font-semibold">{project.data.title}</h2>
-            </div>
-            <p class="text-gray-600 text-pretty sm:text-left">{project.data.description}</p>
-          </div>
-          <div class="flex flex-wrap gap-2 text-sm">
-            {project.data.technologies.map((tech) => (
-              <div class="chip">{tech}</div>
-            ))}
-          </div>
-        </div>
-      </article>
+    projects.map(({ data }) => (
+      <li>
+        <img
+          src={data.imageUrl}
+          alt={`Pantalla de ${data.title}`}
+          loading="lazy"
+          class="aspect-[16/10] w-full rounded-lg border border-line object-cover object-top"
+        />
+        <h3 class="mt-4 font-display text-lg font-semibold tracking-tight">{data.title}</h3>
+        <p class="text-sm text-muted">
+          {data.role}, {data.technologies.join(', ')}
+        </p>
+        <p class="mt-2 text-[0.95rem] text-pretty">{data.description}</p>
+      </li>
     ))
   }
-</div>
+</ul>

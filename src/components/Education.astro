@@ -2,31 +2,36 @@
 import { getCollection } from 'astro:content';
 
 const education = (await getCollection('education')).sort((a, b) => b.data.order - a.data.order);
+const languages = (await getCollection('languages')).sort((a, b) => a.data.order - b.data.order);
 ---
 
-<h1 class="text-3xl font-bold">Educación</h1>
-<ol class="relative border-s border-gray-200 ml-2">
+<ul class="border-b border-line">
   {
-    education.map((edu) => (
-      <li class="mb-10 ms-6">
-        <span class="absolute flex items-center justify-center w-6 h-6 bg-gray-950 rounded-full -start-3 ring-8 ring-gray-50 mt-0.5">
-          <i class="fa-solid fa-graduation-cap text-gray-200 text-xs" />
-        </span>
-        <div class="flex flex-col gap-1">
+    education.map(({ data }) =>
+      data.degrees.map((deg) => (
+        <li class="row !py-5">
+          <p class="row-aside">{deg.period}</p>
           <div>
-            <h3 class="text-lg font-semibold text-gray-900">{edu.data.institution}</h3>
-            <p class="text-sm text-gray-500">{edu.data.location}</p>
+            <h3 class="font-medium">{deg.title}</h3>
+            <p class="text-muted">
+              {data.institution}, {data.location}
+            </p>
           </div>
-          <ul class="flex flex-col gap-0.5 mt-1">
-            {edu.data.degrees.map((deg) => (
-              <li class="flex flex-col sm:flex-row sm:items-baseline gap-0 sm:gap-2">
-                <em class="text-gray-800 not-italic">{deg.title}</em>
-                <span class="text-sm text-gray-500">{deg.period}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </li>
-    ))
+        </li>
+      )),
+    )
   }
-</ol>
+  <li class="row !py-5">
+    <p class="row-aside">Idiomas</p>
+    <p>
+      {
+        languages
+          .map(({ data }) => {
+            const certs = data.certifications?.map((c) => c.label).join(' y ');
+            return `${data.name} ${data.level.toLowerCase()}${certs ? ` (${certs})` : ''}`;
+          })
+          .join(', ')
+      }
+    </p>
+  </li>
+</ul>

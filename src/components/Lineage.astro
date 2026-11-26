@@ -1,0 +1,180 @@
+---
+// Diagrama del flujo del data warehouse: fuentes → raw → staging → modelo → métricas → uso.
+type Node = { label: string; sub?: string; key?: boolean };
+type Column = { title: string; nodes: Node[] };
+
+const columns: Column[] = [
+  {
+    title: 'Fuentes',
+    nodes: [
+      { label: 'SAP ECC' },
+      { label: 'Sistemas clínicos' },
+      { label: 'Agenda' },
+      { label: 'Isapres y Fonasa' },
+      { label: 'APIs externas' },
+    ],
+  },
+  { title: 'Ingesta', nodes: [{ label: 'raw', sub: '1.200 tablas' }] },
+  { title: 'Limpieza', nodes: [{ label: 'staging', sub: '121 modelos' }] },
+  {
+    title: 'Modelo',
+    nodes: [
+      { label: 'Dimensiones', sub: '97 modelos' },
+      { label: 'Hechos', sub: '91 modelos' },
+    ],
+  },
+  { title: 'Métricas', nodes: [{ label: 'Capa semántica', sub: 'MetricFlow', key: true }] },
+  {
+    title: 'Uso',
+    nodes: [
+      { label: 'Power BI' },
+      { label: 'Correo', sub: '15 reportes' },
+      { label: 'Asistentes IA', sub: 'vía MCP' },
+    ],
+  },
+];
+
+const W = 980;
+const TOP = 52;
+const H = 400;
+const NW = 142;
+const NH = 50;
+const step = (W - NW) / (columns.length - 1);
+
+const placed = columns.map((col, c) => {
+  const band = (H - TOP) / col.nodes.length;
+  return col.nodes.map((n, i) => ({ ...n, x: c * step, y: TOP + band * (i + 0.5) - NH / 2 }));
+});
+
+const links: [number, number, number, number][] = [];
+for (let c = 0; c < placed.length - 1; c++) {
+  const from = placed[c];
+  const to = placed[c + 1];
+  if (from.length === 1 || to.length === 1) {
+    from.forEach((_, i) => to.forEach((_, j) => links.push([c, i, c + 1, j])));
+  } else {
+    from.forEach((_, i) => links.push([c, i, c + 1, Math.min(i, to.length - 1)]));
+  }
+}
+
+const paths = links.map(([c1, i, c2, j]) => {
+  const a = placed[c1][i];
+  const b = placed[c2][j];
+  const x1 = a.x + NW;
+  const y1 = a.y + NH / 2;
+  const x2 = b.x;
+  const y2 = b.y + NH / 2;
+  const mx = (x1 + x2) / 2;
+  return { d: `M${x1},${y1} C${mx},${y1} ${mx},${y2} ${x2},${y2}`, col: c1 };
+});
+---
+
+<figure class="m-0">
+  <div
+    class="-mx-4 overflow-x-auto px-4 sm:mx-0 sm:px-0"
+    tabindex="0"
+    aria-label="Diagrama del data warehouse, se puede desplazar"
+  >
+    <svg
+      viewBox={`-2 0 ${W + 4} ${H + 4}`}
+      class="lineage block h-auto w-full min-w-[720px]"
+      role="img"
+      aria-labelledby="lineage-title lineage-desc"
+    >
+      <title id="lineage-title">Flujo del data warehouse de la clínica</title>
+      <desc id="lineage-desc">
+        Cinco tipos de fuentes cargan a 1.200 tablas raw; dbt las limpia en staging y las modela en
+        97 dimensiones y 91 hechos; una capa semántica entrega las métricas a Power BI, a 15
+        reportes por correo y a asistentes de IA vía MCP.
+      </desc>
+
+      {
+        columns.map((col, c) => (
+          <text x={c * step} y="18" class="col-title">
+            {col.title}
+          </text>
+        ))
+      }
+
+      <g fill="none">
+        {
+          paths.map((p) => (
+            <path d={p.d} pathLength="1" class="edge" style={`--d:${p.col * 180}ms`} />
+          ))
+        }
+      </g>
+
+      {
+        placed.flat().map((n) => (
+          <g class={n.key ? 'node key' : 'node'}>
+            <rect x={n.x} y={n.y} width={NW} height={NH} rx="10" />
+            <text x={n.x + 14} y={n.y + (n.sub ? 21 : 30)} class="label">
+              {n.label}
+            </text>
+            {n.sub && (
+              <text x={n.x + 14} y={n.y + 39} class="sub">
+                {n.sub}
+              </text>
+            )}
+          </g>
+        ))
+      }
+    </svg>
+  </div>
+  <figcaption class="mt-4 max-w-2xl text-sm text-muted">
+    El data warehouse que diseñé y opero en Clínica Alemana Osorno. Carga cada madrugada más de 250
+    millones de filas y entrega las mismas métricas a todos los que las usan.
+  </figcaption>
+</figure>
+
+<style>
+  .lineage {
+    font-family: var(--font-sans);
+  }
+  .col-title {
+    fill: var(--muted);
+    font-size: 13px;
+  }
+  .edge {
+    stroke: var(--cobalt);
+    stroke-width: 1.4;
+    stroke-opacity: 0.55;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+  .node rect {
+    fill: var(--raised);
+    stroke: var(--line);
+    stroke-width: 1.2;
+  }
+  .node .label {
+    fill: var(--ink);
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .node .sub {
+    fill: var(--muted);
+    font-size: 12.5px;
+  }
+  .node.key rect {
+    fill: var(--cobalt);
+    stroke: var(--cobalt);
+  }
+  .node.key .label,
+  .node.key .sub {
+    fill: var(--raised);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .edge {
+      stroke-dashoffset: 1;
+      animation: draw 700ms cubic-bezier(0.3, 0.6, 0.2, 1) forwards;
+      animation-delay: calc(250ms + var(--d));
+    }
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+  }
+</style>

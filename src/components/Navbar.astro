@@ -2,72 +2,41 @@
 interface Section {
   label: string;
   id: string;
-  icon: string;
 }
 
-type Sections = 'HOME' | 'EXPERIENCE' | 'EDUCATION' | 'PROJECTS' | 'SKILLS' | 'ABOUT' | 'CONTACT';
+type Sections = 'HOME' | 'EXPERIENCE' | 'PROJECTS' | 'SKILLS' | 'EDUCATION' | 'CONTACT';
 
 export const SECTION: Record<Sections, Section> = {
-  HOME: {
-    label: 'Inicio',
-    id: 'inicio',
-    icon: 'fa-solid fa-house',
-  },
-  EXPERIENCE: {
-    label: 'Experiencia',
-    id: 'experiencia',
-    icon: 'fa-solid fa-briefcase',
-  },
-  EDUCATION: {
-    label: 'Educación',
-    id: 'educacion',
-    icon: 'fa-solid fa-graduation-cap',
-  },
-  PROJECTS: {
-    label: 'Proyectos',
-    id: 'proyectos',
-    icon: 'fa-solid fa-code-branch',
-  },
-  SKILLS: {
-    label: 'Conocimientos',
-    id: 'conocimientos',
-    icon: 'fa-solid fa-layer-group',
-  },
-  ABOUT: {
-    label: 'Sobre mí',
-    id: 'sobre-mi',
-    icon: 'fa-solid fa-user',
-  },
-  CONTACT: {
-    label: 'Contacto',
-    id: 'contacto',
-    icon: 'fa-solid fa-envelope',
-  },
+  HOME: { label: 'Inicio', id: 'inicio' },
+  EXPERIENCE: { label: 'Experiencia', id: 'experiencia' },
+  PROJECTS: { label: 'Proyectos', id: 'proyectos' },
+  SKILLS: { label: 'Conocimientos', id: 'conocimientos' },
+  EDUCATION: { label: 'Educación', id: 'educacion' },
+  CONTACT: { label: 'Contacto', id: 'contacto' },
 };
 
-const SECTIONS = Object.values(SECTION);
+const LINKS = [SECTION.EXPERIENCE, SECTION.PROJECTS, SECTION.SKILLS, SECTION.CONTACT];
 ---
 
-<nav
-  class="fixed bottom-0 sm:top-3 left-1/2 -translate-x-1/2 z-50 h-fit w-full sm:w-fit border-t border-gray-200 sm:border-0"
->
-  <div
-    class="flex justify-between sm:justify-baseline items-center font-semibold text-sm px-2 sm:px-0 sm:text-base
-           sm:rounded-full sm:shadow-sm sm:backdrop-blur-sm bg-gray-50 sm:bg-transparent"
-  >
-    {
-      SECTIONS.map((section) => (
-        <a
-          href={`#${section.id}`}
-          class="flex justify-center sm:inline-block p-3 rounded-full
-                 font-medium duration-200 hover:text-gray-600"
-        >
-          <div class="hidden sm:block whitespace-nowrap">{section.label}</div>
-          <div class="block sm:hidden text-xl">
-            <i class={`${section.icon} text-2xl`} />
-          </div>
-        </a>
-      ))
-    }
-  </div>
-</nav>
+<header class="sticky top-0 z-40 border-b border-line bg-paper/85 backdrop-blur-md">
+  <nav class="wrap flex h-16 items-center justify-between gap-4" aria-label="Principal">
+    <a href={`#${SECTION.HOME.id}`} class="font-display text-lg font-semibold tracking-tight">
+      Gabriel Oyarzo
+    </a>
+    <ul class="hidden items-center gap-7 text-sm text-muted md:flex">
+      {
+        LINKS.map((s) => (
+          <li>
+            <a href={`#${s.id}`} class="transition-colors hover:text-ink">
+              {s.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <a href="/Gabriel_Oyarzo_CV.pdf" download class="btn btn-quiet !py-1.5">
+      <i class="fa-solid fa-arrow-down text-xs" aria-hidden="true"></i>
+      CV en PDF
+    </a>
+  </nav>
+</header>
