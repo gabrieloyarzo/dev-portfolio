@@ -4,19 +4,15 @@
   "title": "Ingeniero de Datos",
   "company": "Clínica Alemana Osorno",
   "location": "Chile",
-  "description": "Diseño, implementación y operación del data warehouse institucional en PostgreSQL. Integra el ERP SAP ECC, los sistemas clínicos y de agenda y servicios externos en una fuente única de datos para finanzas, gestión y áreas clínicas, con más de 250 millones de registros y actualización diaria automatizada. Pipeline de ingesta en Python definido por configuración, con carga incremental, validaciones y registro de cada ejecución. Modelado dimensional (Kimball) en dbt con más de 460 modelos, pruebas de datos automatizadas y una capa semántica de métricas en MetricFlow. Las métricas se consumen desde Power BI, reportes automáticos por correo y asistentes de IA mediante un servidor MCP con control de acceso por usuario. Integración y despliegue continuo con GitHub Actions. El warehouse sostiene el proceso de presupuesto y la analítica de gestión, y reemplazó consolidaciones manuales en Excel.",
+  "description": "Diseño, implementación y operación del data warehouse institucional, que integra el ERP, los sistemas clínicos y servicios externos en una fuente única de datos para finanzas, gestión y áreas clínicas, con más de 250 millones de registros actualizados a diario. Ingesta automatizada en Python y modelado dimensional en dbt, con pruebas de calidad de datos en cada actualización. Capa semántica de métricas compartida por Power BI, reportes automáticos por correo y asistentes de IA con control de acceso por usuario. El warehouse sostiene el proceso de presupuesto y la analítica de gestión, y reemplazó consolidaciones manuales en Excel.",
   "technologies": [
     "Python",
     "PostgreSQL",
     "dbt",
     "MetricFlow",
-    "Elementary",
     "Power BI",
-    "MCP",
-    "Claude API",
     "SAP ECC",
-    "ABAP",
-    "Microsoft Graph",
+    "MCP",
     "GitHub Actions"
   ]
 }

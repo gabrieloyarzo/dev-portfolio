@@ -1,73 +1,287 @@
 ---
-import Experiences from '../components/Experiences.astro';
-import Education from '../components/Education.astro';
-import Projects from '../components/Projects.astro';
-import Skills from '../components/Skills.astro';
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import Contact from '../components/Contact.astro';
-import Lineage from '../components/Lineage.astro';
-import SectionContainer from '../components/SectionContainer.astro';
-import { SECTION } from '../components/Navbar.astro';
 import { SOCIALS_URL } from '../assets/socials';
+
+const [profile] = await getCollection('profile');
+const experiences = (await getCollection('experiences')).sort(
+  (a, b) => b.data.order - a.data.order,
+);
+const projects = (await getCollection('projects')).sort((a, b) => b.data.order - a.data.order);
+const skills = (await getCollection('skills')).sort((a, b) => a.data.order - b.data.order);
+const education = (await getCollection('education')).sort((a, b) => b.data.order - a.data.order);
+const languages = (await getCollection('languages')).sort((a, b) => a.data.order - b.data.order);
+
+const NAV = [
+  { id: 'sobre-mi', label: 'Sobre mí' },
+  { id: 'experiencia', label: 'Experiencia' },
+  { id: 'proyectos', label: 'Proyectos' },
+  { id: 'conocimientos', label: 'Conocimientos' },
+];
+
+const splitSentences = (s: string) => s.split(/(?<=\.)\s+(?=[A-ZÁÉÍÓÚ])/);
+const email = SOCIALS_URL.mail.replace('mailto:', '');
 ---
 
 <Layout>
-  <main id="contenido">
-    <section id={SECTION.HOME.id} class="wrap pt-16 pb-20 sm:pt-24">
-      <p class="text-muted">Ingeniero de Datos, Osorno, Chile</p>
-      <h1
-        class="mt-3 font-display text-[clamp(2.75rem,8vw,5.5rem)] leading-[0.95] font-semibold tracking-[-0.03em] text-balance"
-      >
-        Gabriel Oyarzo Ramírez
-      </h1>
-      <p class="mt-8 max-w-[38rem] text-lg text-pretty text-muted sm:text-xl">
-        Diseño y opero plataformas de datos para la toma de decisiones: integración del ERP y los
-        sistemas clínicos, modelado dimensional con dbt y una capa de métricas común para Power BI,
-        reportes automatizados e inteligencia artificial.
-      </p>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href={`#${SECTION.CONTACT.id}`} class="btn btn-primary">Contacto</a>
-        <a
-          href={SOCIALS_URL.linkedIn}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-quiet"
+  <div
+    class="mx-auto min-h-screen max-w-6xl px-6 sm:px-12 lg:flex lg:justify-between lg:gap-16 lg:px-20"
+  >
+    <header
+      class="pt-16 lg:sticky lg:top-0 lg:flex lg:max-h-screen lg:w-[44%] lg:flex-col lg:justify-between lg:py-24"
+    >
+      <div>
+        <h1
+          class="font-display text-[2.75rem] leading-[1] font-semibold tracking-[-0.03em] sm:text-6xl"
         >
-          <i class="fa-brands fa-linkedin-in" aria-hidden="true"></i> LinkedIn
-        </a>
+          <a href="/">{profile.data.name.replace('Alexis ', '')}</a>
+        </h1>
+        <p class="mt-4 font-display text-xl font-medium tracking-tight sm:text-2xl">
+          {profile.data.title}
+        </p>
+        <p class="mt-4 max-w-xs text-muted">
+          Convierto datos dispersos en información confiable para decidir.
+        </p>
+
+        <nav class="mt-16 hidden lg:block" aria-label="Secciones">
+          <ul class="flex flex-col gap-1">
+            {
+              NAV.map((s) => (
+                <li>
+                  <a
+                    href={`#${s.id}`}
+                    class="nav-link group flex items-center gap-4 py-2.5"
+                    data-nav={s.id}
+                  >
+                    <span class="nav-line h-px w-8 bg-muted transition-all duration-200 group-hover:w-16 group-hover:bg-ink" />
+                    <span class="nav-label text-sm font-medium text-muted transition-colors group-hover:text-ink">
+                      {s.label}
+                    </span>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+
+      <div class="mt-8 flex flex-wrap items-center gap-5 lg:mt-0">
         <a
           href={SOCIALS_URL.github}
           target="_blank"
           rel="noopener noreferrer"
-          class="btn btn-quiet"
+          class="text-muted hover:text-ink"
+          aria-label="GitHub"
         >
-          <i class="fa-brands fa-github" aria-hidden="true"></i> GitHub
+          <i class="fa-brands fa-github text-2xl" aria-hidden="true"></i>
+        </a>
+        <a
+          href={SOCIALS_URL.linkedIn}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-muted hover:text-ink"
+          aria-label="LinkedIn"
+        >
+          <i class="fa-brands fa-linkedin text-2xl" aria-hidden="true"></i>
+        </a>
+        <a
+          href={SOCIALS_URL.mail}
+          class="text-muted hover:text-ink"
+          aria-label={`Correo a ${email}`}
+        >
+          <i class="fa-solid fa-envelope text-2xl" aria-hidden="true"></i>
+        </a>
+        <a href="/Gabriel_Oyarzo_CV.pdf" download class="btn btn-quiet ml-1">
+          <i class="fa-solid fa-arrow-down text-xs" aria-hidden="true"></i> Descargar CV
         </a>
       </div>
+    </header>
 
-      <div class="mt-16 sm:mt-20">
-        <Lineage />
-      </div>
-    </section>
+    <main id="contenido" class="pt-20 pb-24 lg:w-[54%] lg:py-24">
+      <section id="sobre-mi" class="scroll-mt-16 lg:scroll-mt-24" aria-label="Sobre mí">
+        <h2 class="sticky-title">Sobre mí</h2>
+        <div class="flex flex-col gap-4 text-muted">
+          <p>
+            Soy <span class="text-ink">ingeniero de datos</span> en Clínica Alemana Osorno. Diseñé desde
+            cero y opero su data warehouse institucional: integra el ERP, los sistemas clínicos y servicios
+            externos en una sola fuente de datos que usan finanzas, gestión y las áreas clínicas.
+          </p>
+          <p>
+            Mi trabajo va de punta a punta: la ingesta automatizada, el modelado dimensional con dbt
+            y una capa de métricas que comparten Power BI, los reportes automáticos y los asistentes
+            de IA. Me importa que una cifra signifique lo mismo en todos lados y que se pueda
+            explicar de dónde sale.
+          </p>
+          <p>
+            Antes de los datos desarrollé aplicaciones web full-stack. Soy Ingeniero Civil en
+            Informática por la Universidad de Los Lagos, titulado con distinción máxima.
+          </p>
+        </div>
+      </section>
 
-    <SectionContainer id={SECTION.EXPERIENCE.id} title="Experiencia">
-      <Experiences />
-    </SectionContainer>
+      <section
+        id="experiencia"
+        class="mt-24 scroll-mt-16 sm:mt-32 lg:scroll-mt-24"
+        aria-label="Experiencia"
+      >
+        <h2 class="sticky-title">Experiencia</h2>
+        <ol class="flex flex-col gap-14">
+          {
+            experiences.map(({ data }) => {
+              const [lead, ...rest] = splitSentences(data.description);
+              return (
+                <li class="grid gap-2 sm:grid-cols-[8.5rem_1fr] sm:gap-6">
+                  <p class="pt-1 text-xs leading-5 font-medium text-muted tabular-nums">
+                    {data.date}
+                  </p>
+                  <div>
+                    <h3 class="font-medium leading-snug">{data.title}</h3>
+                    <p class="text-[0.95rem] text-muted">{data.company}</p>
+                    {data.subtitle && <p class="text-sm text-muted">{data.subtitle}</p>}
+                    <p class="mt-3 text-[0.95rem] text-muted text-pretty">{lead}</p>
+                    {rest.length > 0 && (
+                      <ul class="mt-3 flex flex-col gap-2 text-[0.95rem] text-muted text-pretty">
+                        {rest.map((s) => (
+                          <li class="relative pl-4 before:absolute before:top-[0.68em] before:left-0 before:h-1 before:w-1 before:rounded-full before:bg-cobalt">
+                            {s}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {data.technologies && (
+                      <ul class="mt-4 flex flex-wrap gap-1.5" aria-label="Tecnologías">
+                        {data.technologies.map((t) => (
+                          <li class="pill">{t}</li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                </li>
+              );
+            })
+          }
+        </ol>
+        <a
+          href="/Gabriel_Oyarzo_CV.pdf"
+          download
+          class="mt-12 inline-flex items-center gap-2 font-medium link"
+        >
+          Ver currículum completo en PDF
+        </a>
+      </section>
 
-    <SectionContainer id={SECTION.PROJECTS.id} title="Proyectos anteriores">
-      <Projects />
-    </SectionContainer>
+      <section
+        id="proyectos"
+        class="mt-24 scroll-mt-16 sm:mt-32 lg:scroll-mt-24"
+        aria-label="Proyectos"
+      >
+        <h2 class="sticky-title">Proyectos</h2>
+        <p class="mb-8 text-muted">
+          Sistemas de gestión que desarrollé antes de dedicarme a los datos.
+        </p>
+        <ul class="flex flex-col gap-12">
+          {
+            projects.map(({ data }) => (
+              <li class="grid gap-4 sm:grid-cols-[8.5rem_1fr] sm:gap-6">
+                <img
+                  src={data.imageUrl}
+                  alt={`Pantalla de ${data.title}`}
+                  loading="lazy"
+                  class="order-2 aspect-[16/10] w-full max-w-[200px] rounded border border-line object-cover object-top sm:order-1 sm:mt-1"
+                />
+                <div class="order-1 sm:order-2">
+                  <h3 class="font-medium">{data.title}</h3>
+                  <p class="mt-2 text-[0.95rem] text-muted text-pretty">{data.description}</p>
+                  <ul class="mt-4 flex flex-wrap gap-1.5" aria-label="Tecnologías">
+                    {data.technologies.map((t) => (
+                      <li class="pill">{t}</li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
 
-    <SectionContainer id={SECTION.SKILLS.id} title="Conocimientos">
-      <Skills />
-    </SectionContainer>
+      <section
+        id="conocimientos"
+        class="mt-24 scroll-mt-16 sm:mt-32 lg:scroll-mt-24"
+        aria-label="Conocimientos"
+      >
+        <h2 class="sticky-title">Conocimientos</h2>
+        <dl class="flex flex-col gap-6">
+          {
+            skills.map(({ data }) => (
+              <div class="grid gap-1 sm:grid-cols-[8.5rem_1fr] sm:gap-6">
+                <dt class="text-xs leading-6 font-medium text-muted">{data.category}</dt>
+                <dd class="m-0 text-[0.95rem]">{data.items.join(', ')}</dd>
+              </div>
+            ))
+          }
+        </dl>
 
-    <SectionContainer id={SECTION.EDUCATION.id} title="Educación">
-      <Education />
-    </SectionContainer>
+        <h3 class="mt-16 mb-6 text-sm font-semibold">Formación</h3>
+        <ul class="flex flex-col gap-5">
+          {
+            education.flatMap(({ data }) =>
+              data.degrees.map((deg) => (
+                <li class="grid gap-1 sm:grid-cols-[8.5rem_1fr] sm:gap-6">
+                  <p class="text-xs leading-6 font-medium text-muted tabular-nums">
+                    {deg.period.replace(/\s*\(.*\)/, '')}
+                  </p>
+                  <div>
+                    <p class="text-[0.95rem]">{deg.title.replace(' — ', ', ')}</p>
+                    <p class="text-sm text-muted">{data.institution}</p>
+                  </div>
+                </li>
+              )),
+            )
+          }
+          <li class="grid gap-1 sm:grid-cols-[8.5rem_1fr] sm:gap-6">
+            <p class="text-xs leading-6 font-medium text-muted">Idiomas</p>
+            <p class="text-[0.95rem]">
+              {
+                languages
+                  .map(({ data }) => {
+                    const certs = data.certifications?.map((c) => c.label).join(' y ');
+                    return `${data.name} ${data.level.toLowerCase()}${certs ? ` (${certs})` : ''}`;
+                  })
+                  .join(', ')
+              }
+            </p>
+          </li>
+        </ul>
+      </section>
 
-    <SectionContainer id={SECTION.CONTACT.id}>
-      <Contact />
-    </SectionContainer>
-  </main>
+      <footer class="mt-24 max-w-md text-sm text-muted sm:mt-32">
+        <p>
+          ¿Hablamos? Escríbeme a <a href={SOCIALS_URL.mail} class="text-ink link">{email}</a> o por
+          <a
+            href={SOCIALS_URL.linkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-ink link">LinkedIn</a
+          >.
+        </p>
+        <p class="mt-4">
+          Hecho con Astro y Tailwind CSS. © {new Date().getFullYear()} Gabriel Oyarzo.
+        </p>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    const links = document.querySelectorAll<HTMLAnchorElement>('[data-nav]');
+    const setActive = (id: string) =>
+      links.forEach((l) => l.classList.toggle('is-active', l.dataset.nav === id));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => e.isIntersecting && setActive(e.target.id));
+      },
+      { rootMargin: '-35% 0px -60% 0px' },
+    );
+    document.querySelectorAll('main section[id]').forEach((s) => observer.observe(s));
+    setActive('sobre-mi');
+  </script>
 </Layout>

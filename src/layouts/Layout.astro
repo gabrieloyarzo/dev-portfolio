@@ -1,7 +1,5 @@
 ---
 import '../styles/global.css';
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
 
 const description =
   'Gabriel Oyarzo, ingeniero de datos. Diseño y opero data warehouses: ingesta, modelado dimensional con dbt y métricas para Power BI, reportes e IA.';
@@ -31,8 +29,6 @@ const description =
       class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 btn btn-primary"
       >Ir al contenido</a
     >
-    <Navbar />
     <slot />
-    <Footer />
   </body>
 </html>

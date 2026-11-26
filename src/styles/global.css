@@ -79,6 +79,14 @@
 }
 
 @layer components {
+  .sticky-title {
+    @apply sticky top-0 z-20 -mx-6 mb-6 bg-paper/85 px-6 py-4 text-sm font-semibold backdrop-blur-md sm:-mx-12 sm:px-12 lg:sr-only;
+  }
+
+  .pill {
+    @apply rounded-full bg-cobalt/10 px-2.5 py-0.5 text-xs leading-5 font-medium text-cobalt;
+  }
+
   .wrap {
     @apply mx-auto w-full max-w-5xl px-4 sm:px-8;
   }
@@ -110,4 +118,14 @@
   .link {
     @apply underline decoration-line decoration-2 underline-offset-4 transition-colors hover:decoration-cobalt;
   }
+}
+
+/* Fuera de las capas para ganarle a las utilidades w-8 y text-muted. */
+.nav-link.is-active .nav-line {
+  width: 4rem;
+  background: var(--ink);
+}
+
+.nav-link.is-active .nav-label {
+  color: var(--ink);
 }
