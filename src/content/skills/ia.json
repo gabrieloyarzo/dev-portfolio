@@ -1,5 +1,5 @@
 {
   "order": 7,
   "category": "Herramientas de IA",
-  "items": ["Claude Code", "GitHub Copilot", "Codex"]
+  "items": ["Claude Code", "Claude API", "MCP", "pgvector (RAG)", "GitHub Copilot", "Codex"]
 }

@@ -1,5 +1,5 @@
 {
   "order": 5,
   "category": "Análisis de Datos",
-  "items": ["R", "Python", "Power BI", "KNIME"]
+  "items": ["dbt", "MetricFlow", "Elementary", "Power BI", "Python (polars)", "R", "KNIME"]
 }

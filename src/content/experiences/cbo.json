@@ -4,6 +4,25 @@
   "title": "Analista de Inteligencia y Negocios",
   "company": "Clínica Alemana Osorno",
   "location": "Chile",
-  "description": "Diseñé e implementé desde cero un data warehouse institucional en PostgreSQL que consolida más de 100 millones de registros provenientes de cinco fuentes heterogéneas: SAP ECC (extracción automatizada vía ABAP/SFTP), dos sistemas clínicos internos accedidos mediante SSH a través de una Raspberry Pi como gateway de red, y dos APIs externas (Keiron y Sked24). El pipeline ETL, desarrollado en Python con polars y paramiko, gestiona más de 90 tablas con carga diaria automatizada; los datos son modelados en esquema estrella con dbt (staging → dimensiones → hechos → marts) y monitoreados con Elementary para calidad de datos. El resultado reemplazó consolidaciones manuales de Excel que tomaban días por consultas analíticas que se resuelven en minutos. Sobre este warehouse construí Atlas, un asistente conversacional con RAG (pgvector + Claude) que permite consultar el DW en lenguaje natural mediante tool use y streaming SSE; y Zeus, un sistema de inteligencia financiera para gerencia con 28 herramientas de análisis (flujo de caja, cascada de cobranza, proyecciones, inversiones). Complementariamente, desarrollé un sistema web de cobranza (Next.js + Spring Boot) y reportes automáticos en R distribuidos por email.",
-  "technologies": ["Python", "PostgreSQL", "dbt", "polars", "paramiko", "pgvector", "Claude API", "FastAPI", "React", "Next.js", "Spring Boot", "R", "SAP ECC", "ABAP", "SFTP", "launchd"]
+  "description": "Diseñé desde cero y opero el data warehouse institucional en PostgreSQL. Integra 20 sistemas fuente (SAP ECC, sistemas clínicos y de agenda, portales de isapres y Fonasa, APIs de terceros) en unas 1.200 tablas con más de 250 millones de filas. La ingesta es un registry declarativo en Python: agregar una tabla es un YAML y un DDL, sin código nuevo, con estrategias de carga (replace, merge, upsert, snapshot), deduplicación por llave, protección contra cargas vacías y watermarks para deltas de webhook; los portales de prestadores se extraen con Playwright. El modelado sigue Kimball en dbt: más de 460 modelos (staging, 97 dimensiones, 91 hechos) con tests de datos, monitoreo con Elementary y una capa semántica en MetricFlow. Sobre ella construí un servidor MCP que entrega métricas gobernadas a asistentes de IA (solo lectura, visibilidad por usuario, supresión de celdas pequeñas) y Atlas, un asistente con RAG (pgvector + Claude); un reverse ETL a SharePoint vía Microsoft Graph; modelos e informes de Power BI versionados como código, y 15 reportes recurrentes por correo definidos en YAML. Todo corre con launchd en un servidor propio y se despliega con GitHub Actions. Reemplazó consolidaciones manuales en Excel que tomaban días. Además, una plataforma web de cobranza (Next.js + Spring Boot).",
+  "technologies": [
+    "Python",
+    "PostgreSQL",
+    "dbt",
+    "MetricFlow",
+    "Elementary",
+    "polars",
+    "Playwright",
+    "MCP",
+    "pgvector",
+    "Claude API",
+    "Microsoft Graph",
+    "Power BI",
+    "SAP ECC",
+    "ABAP",
+    "GitHub Actions",
+    "launchd",
+    "Next.js",
+    "Spring Boot"
+  ]
 }

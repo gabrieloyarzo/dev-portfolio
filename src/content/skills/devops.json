@@ -1,5 +1,5 @@
 {
   "order": 6,
   "category": "DevOps y Herramientas",
-  "items": ["Docker", "Git", "Cloudflare", "Render", "GNU/Linux"]
+  "items": ["Docker", "Git", "GitHub Actions", "launchd", "Cloudflare", "Render", "GNU/Linux"]
 }
