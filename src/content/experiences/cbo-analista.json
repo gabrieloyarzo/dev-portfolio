@@ -4,6 +4,13 @@
   "title": "Analista de Inteligencia y Negocios",
   "company": "Clínica Alemana Osorno",
   "location": "Chile",
-  "description": "Análisis del estado de cuentas y de los procesos de cobranza para seguir saldos, antigüedad de deuda y gestión con aseguradoras. Automaticé la reportería recurrente para las áreas financieras (reportes en R distribuidos por correo), que reemplazó la preparación manual de informes, y desarrollé un sistema web de cobranza de copagos (Next.js + Spring Boot).",
-  "technologies": ["R", "SQL", "PostgreSQL", "SAP ECC", "Next.js", "Spring Boot"]
+  "description": "Análisis del estado de cuentas y de los procesos de cobranza para el seguimiento de saldos, antigüedad de deuda y gestión con aseguradoras. Automatización de la reportería financiera recurrente, que reemplazó la preparación manual de informes. Desarrollo de una aplicación web de gestión de cobranza (Next.js y Spring Boot).",
+  "technologies": [
+    "R",
+    "SQL",
+    "PostgreSQL",
+    "SAP ECC",
+    "Next.js",
+    "Spring Boot"
+  ]
 }

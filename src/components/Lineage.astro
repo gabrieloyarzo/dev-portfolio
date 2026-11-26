@@ -7,15 +7,14 @@ const columns: Column[] = [
   {
     title: 'Fuentes',
     nodes: [
-      { label: 'SAP ECC' },
+      { label: 'ERP', sub: 'SAP ECC' },
       { label: 'Sistemas clínicos' },
-      { label: 'Agenda' },
-      { label: 'Isapres y Fonasa' },
-      { label: 'APIs externas' },
+      { label: 'Agenda médica' },
+      { label: 'Servicios externos' },
     ],
   },
   { title: 'Ingesta', nodes: [{ label: 'raw', sub: '1.200 tablas' }] },
-  { title: 'Limpieza', nodes: [{ label: 'staging', sub: '121 modelos' }] },
+  { title: 'Estandarización', nodes: [{ label: 'staging', sub: '121 modelos' }] },
   {
     title: 'Modelo',
     nodes: [
@@ -37,7 +36,7 @@ const columns: Column[] = [
 const W = 980;
 const TOP = 52;
 const H = 400;
-const NW = 142;
+const NW = 154;
 const NH = 50;
 const step = (W - NW) / (columns.length - 1);
 
@@ -83,9 +82,9 @@ const paths = links.map(([c1, i, c2, j]) => {
     >
       <title id="lineage-title">Flujo del data warehouse de la clínica</title>
       <desc id="lineage-desc">
-        Cinco tipos de fuentes cargan a 1.200 tablas raw; dbt las limpia en staging y las modela en
-        97 dimensiones y 91 hechos; una capa semántica entrega las métricas a Power BI, a 15
-        reportes por correo y a asistentes de IA vía MCP.
+        El ERP, los sistemas clínicos, la agenda y servicios externos se cargan a 1.200 tablas raw;
+        dbt las estandariza en staging y las modela en 97 dimensiones y 91 hechos; una capa semántica
+        entrega las métricas a Power BI, a 15 reportes por correo y a asistentes de IA vía MCP.
       </desc>
 
       {
@@ -122,8 +121,8 @@ const paths = links.map(([c1, i, c2, j]) => {
     </svg>
   </div>
   <figcaption class="mt-4 max-w-2xl text-sm text-muted">
-    El data warehouse que diseñé y opero en Clínica Alemana Osorno. Carga cada madrugada más de 250
-    millones de filas y entrega las mismas métricas a todos los que las usan.
+    Arquitectura del data warehouse que diseñé y opero en Clínica Alemana Osorno: más de 250
+    millones de registros actualizados a diario y un único conjunto de métricas para todas las áreas.
   </figcaption>
 </figure>
 

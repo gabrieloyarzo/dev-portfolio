@@ -5,5 +5,5 @@
   "email": "gabrieloyarzoramirez@gmail.com",
   "website": "gabrieloyarzo.com",
   "phone": "+56 9 5311 6464",
-  "summary": "Ingeniero Civil en Informática con distinción máxima. Construí y opero el data warehouse de una clínica: 20 sistemas fuente, más de 250 millones de filas, ingesta declarativa en Python, modelado dimensional con dbt y una capa semántica que sirve las mismas métricas a Power BI, reportes automáticos y asistentes de IA vía MCP. Combino ingeniería de datos, integración con SAP y sistemas heredados, IA aplicada y desarrollo full-stack."
+  "summary": "Ingeniero Civil en Informática, titulado con distinción máxima, especializado en ingeniería de datos. Diseño y opero el data warehouse de Clínica Alemana Osorno: integración del ERP y los sistemas clínicos, modelado dimensional con dbt y una capa de métricas común para Power BI, reportes automatizados e inteligencia artificial. Experiencia en integración con SAP ECC y desarrollo full-stack."
 }
